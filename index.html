@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Age calculator</title>
+</head>
+<body>
+    <div class="body-container">
+        <div class="calculator-body">
+            <div class="input-fuld">
+                <input type="date" id="date-claender">
+            </div>
+            <div class="button-continer">
+                <button type="button" id="resut-btn" onclick="claculate_date()">Calculate</button>
+            </div>
+            <div class="resut-container">
+                <p id="resut-text"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        //    const today = new Date().toISOString().split('T')[0];
+        //    document.getElementById('date-claender').setAttribute('max', today);
+          let input_date = document.getElementById("date-claender");
+          input_date.max =new Date().toISOString().split("T")[0];
+       
+          function claculate_date(){
+            let birthdate = new Date(input_date.value);
+
+            let d1 = birthdate.getDate();
+            // add +1 in month use because it started to 0 and month start 1 because it use +1 এটা ০ থেকে শুরু হয় মাস জানুয়ারি মাস ১ থেকে শুরু হয় এজন্য এখানে +1 ব্যবহার 
+            // করা হয়েছে। 
+            let m1 = birthdate.getMonth() +1;
+            let y1 = birthdate.getFullYear();
+            // this variable diclard todays date 
+            let today = new Date();
+            
+            let d2 = birthdate.getDate();
+            // add +1 in month use because it started to 0 and month start 1 because it use +1 এটা ০ থেকে শুরু হয় মাস জানুয়ারি মাস ১ থেকে শুরু হয় এজন্য এখানে +1 ব্যবহার 
+            // করা হয়েছে।  
+            let m2 = birthdate.getMonth() +1;
+            let y2 = birthdate.getFullYear();
+            // this variable store date month year deffrence.
+            let d3, m3, y3;
+            // y3 is year difference y2 is current year and y1 is birth year.
+            // y2 - y1 we get the year gap.
+            y3 = y2 - y1;
+
+            if(m2 >= m1){
+                m3 = m2 - m1;
+            }
+            else{
+                y3-- ;
+                m3 = 12 + m2 - m1;
+            }
+            if(d2 >= d1){
+                d3 = d2 - d1;
+            }
+            else{
+                // it is decris the month value 
+                m3--;
+                d3 = getDaysInMonth(y1, m1) + d2 - d1;
+            }
+            if(m3 < 0){
+                m3 = 11
+                y3 --;
+            }
+            console.log(d3, m3, y3);
+        }
+
+        function getDaysInMonth(year, month){
+          return new Date(year, month, 0).getDate();
+        }
+          
+    </script>
+
+</body>
+</html>
